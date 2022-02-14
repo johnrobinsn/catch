@@ -1,0 +1,7 @@
+chkpt/*
+!chkpt/best_*
+runs/*
+prepped_mnist/*
+mnist/*
+__pycache__/*
+
