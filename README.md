@@ -3,7 +3,7 @@ This repository contains code that will reproduce the results of the paper title
 
 Here is the [assocated blog article](https://www.storminthecastle.com/post/catch) describing this project in more detail.
 
-There are two different tracks one is to use a recurrent model of attention to learn to play a very simplified game of "Catch" and the other track is to learn to classify mnist digits using the same recurrent attention approach.
+There are two different tracks one is to use a recurrent model of attention to learn to play a very simplified game of "Catch" (described in the paper) and the other track is to learn to classify mnist digits using the same recurrent attention approach.
 
 ## Setup Environment
 I recommend that you use a python version manager.  I use [conda](https://docs.conda.io/en/latest/).
