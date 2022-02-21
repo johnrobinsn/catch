@@ -1,5 +1,5 @@
 # catch
-This repository contains code that will reproduce the results of the paper titled, ["Recurrent Models of Visual Attention"](https://proceedings.neurips.cc/paper/2014/file/09c6c3783b4a70054da74f2538ed47c6-Paper.pdf).
+This repository contains PyTorch code that will reproduce the results of the paper titled, ["Recurrent Models of Visual Attention"](https://proceedings.neurips.cc/paper/2014/file/09c6c3783b4a70054da74f2538ed47c6-Paper.pdf).
 
 Here is the [assocated blog article](https://www.storminthecastle.com/posts/catch) describing this project in more detail.
 
