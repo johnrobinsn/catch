@@ -41,14 +41,6 @@ parser.add_argument('--seed',type=int,default=42,
 parser.add_argument('--demo',action='store_true',default=False,
                     help='demo catch from best checkpoint')
 
-#random seeds that don't converge
-#42
-#543
-#112358
-#314159
-#random seeds that work
-5555555
-
 
 args = parser.parse_args()
 
