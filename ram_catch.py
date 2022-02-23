@@ -66,7 +66,7 @@ def adjust_learning_rate(optimizer, epoch, lr):
   return lr
 
 # hyperparameters
-image_size = 24
+image_size = args.catch_grid_size
 scale = 3
 glimpse_size = 6
 
@@ -78,7 +78,7 @@ std = 0.25
 
 # Need to specialize some of the modules for catch
 # Using an LSTM for recurrent core
-# We don't have a supervised label for action.  
+# We don't have a supervised label for action.
 # Pure reinforcement learning based Loss for both Action and Location networks.
 
 class CatchCore(nn.Module):
@@ -136,7 +136,7 @@ class CatchLoss(nn.Module):
   def __init__(self, gamma):
     super(CatchLoss, self).__init__()
     self.baseline = nn.Parameter(torch.zeros(1,1).to(device), requires_grad = True)
-    # learn weights to blend composite loss function 
+    # learn weights to blend composite loss function
     self.wa = nn.Parameter(torch.ones(1,1).to(device),requires_grad=True)
     self.wl = nn.Parameter(torch.ones(1,1).to(device),requires_grad=True)
     self.wb = nn.Parameter(torch.ones(1,1).to(device),requires_grad=True)
@@ -199,7 +199,7 @@ def train():
   loss_fn = CatchLoss(gamma=0.9).to(device)
   optimizer = optim.Adam([{'params': model.parameters(), 'lr': lr}, {
                         'params': loss_fn.parameters(), 'lr': lr}])
-  env = Catch(batch_size=batch_size, device=device)
+  env = Catch(grid_size=args.catch_grid_size,batch_size=batch_size, device=device)
 
   while True:
     epoch += 1
@@ -244,7 +244,7 @@ def train():
     print(f'=> Epoch: {epoch} Average loss: a {avg_train_aloss:.4f} l {avg_train_lloss:.4f} b {avg_train_bloss:.4f} Reward: {avg_train_reward:.1f} lr: {current_lr:.7f}')
     writer.add_scalar('reward',train_reward*100/(n_batches*batch_size),epoch)
     writer.add_scalar('eps:',eps(epoch),epoch)
-    
+
 
     torch.save([model.state_dict(), loss_fn.state_dict(), optimizer.state_dict()],f'./chkpt/catch_{epoch}.pth')
 
@@ -254,7 +254,7 @@ def demo():
   loss_fn = CatchLoss(gamma=1).to(device)
   optimizer = optim.Adam([{'params': model.parameters(), 'lr': lr}, {
                         'params': loss_fn.parameters(), 'lr': lr}])
-  env = Catch(batch_size=1, device=device)
+  env = Catch(grid_size=args.catch_grid_size,batch_size=1, device=device)
 
   # load the pretrained model for demonstration purposes
   m,l,o = torch.load('./chkpt/best_catch.pth',map_location=torch.device(device))
